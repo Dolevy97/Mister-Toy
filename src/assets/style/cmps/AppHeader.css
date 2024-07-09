@@ -1,0 +1,31 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-inline: 1.6em;
+
+    height: 66px;
+    width: 100%;
+    background-color: var(--clr1bg);
+    color: var(--clr1txt);
+}
+
+.app-nav {
+    display: flex;
+    gap: 1em;
+    margin-block: 1em;
+}
+
+.app-nav a {
+    transition: scale .2s;
+}
+
+.app-nav a:hover {
+    scale: 1.1;
+}
+
+a.active {
+    text-decoration: underline;
+    text-underline-offset: .35em;
+}

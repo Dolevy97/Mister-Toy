@@ -1,0 +1,14 @@
+.app-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 33px;
+    width: 100%;
+    background-color: var(--clr1bg);
+    color: var(--clr1txt);
+}
+
+.app-footer p {
+    margin: 0;
+}

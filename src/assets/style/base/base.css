@@ -1,0 +1,51 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: .5em 0 .5em;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+}
+
+p {
+  margin: 0 0 .5em;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+
+
+/* Dont stretch my Media */
+img,
+embed,
+video,
+object {
+  max-width: 100%
+}
+
+/* Simple and useful CSS Debugging Technique */
+.debug * {
+  outline: 1px solid gold
+}
+
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr auto ;
+  min-height: 100vh;
+}

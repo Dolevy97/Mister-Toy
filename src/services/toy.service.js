@@ -40,8 +40,6 @@ function getDefaultFilter() {
     return { name: '', inStock: '', labels: [] }
 }
 
-console.log(_getEmptyToy())
-
 function _getRandomName() {
     const names = ['Teddy Bear', 'Action Figure', 'Doll', 'Lego Set', 'Puzzle', 'Race Car', 'Drone', 'Board Game']
     return names[Math.floor(Math.random() * names.length)]
