@@ -5,7 +5,7 @@ import { loadToys, removeToy, saveToy, setFilterBy, setSortBy } from "../store/a
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ToyList } from "../cmps/ToyList.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ToyFilter } from "../cmps/ToyFilter.jsx";
 import { ToySort } from "../cmps/ToySort.jsx";
 
@@ -17,13 +17,24 @@ export function ToyIndex() {
 
     const navigate = useNavigate()
 
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const defaultFilter = toyService.getFilterFromSearchParams(searchParams)
+    const defaultSort = toyService.getSortFromSearchParams(searchParams)
+
     useEffect(() => {
+        setSearchParams({ ...filterBy, ...sortBy })
         loadToys()
             .catch(err => {
                 showErrorMsg('Cannot load toys!')
                 console.log('Cannot load toys! err:', err)
             })
     }, [filterBy, sortBy])
+
+    useEffect(() => {
+        setFilterBy(defaultFilter)
+        setSortBy(defaultSort)
+    }, [])
 
     function onAddRandomToy() {
         const toyToSave = toyService.getRandomToy()
@@ -65,8 +76,7 @@ export function ToyIndex() {
         setSortBy(sort)
     }
 
-    if (!toys.length) return <h2>Loading toys..</h2>
-
+    if (!toys) return <h2>Loading toys..</h2>
     return (
         <section className="toy-index">
             <button onClick={onAddRandomToy} className="btn btn-add">Add Random Toy</button>
@@ -75,7 +85,7 @@ export function ToyIndex() {
                 <ToyFilter toys={toys} filterBy={filterBy} onSetFilter={onSetFilter} />
                 <ToySort sortBy={sortBy} onSetSort={onSetSort} />
             </section>
-            <ToyList toys={toys} onMoveToToy={onMoveToToy} onRemoveToy={onRemoveToy} onEditToy={onEditToy} />
+            {toys.length && <ToyList toys={toys} onMoveToToy={onMoveToToy} onRemoveToy={onRemoveToy} onEditToy={onEditToy} />}
         </section>
     )
 }

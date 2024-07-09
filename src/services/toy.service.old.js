@@ -1,7 +1,9 @@
-import { httpService } from "./http.service.js";
+import { storageService } from "./async-storage.service.js";
 import { utilService } from './util.service.js'
 
-const BASE_URL = 'toy/'
+const STORAGE_KEY = 'toyDB'
+
+_createRandomToys()
 
 export const toyService = {
     query,
@@ -10,30 +12,31 @@ export const toyService = {
     remove,
     getRandomToy,
     getEmptyToy,
-    getDefaultFilter,
-    getDefaultSort,
-    getFilterFromSearchParams,
-    getSortFromSearchParams
+    getDefaultFilter
 }
 
 function query(filterBy = {}, sortBy = {}) {
-    const filterAndSort = { ...filterBy, ...sortBy }
-    return httpService.get(BASE_URL, filterAndSort)
+    return storageService.query(STORAGE_KEY)
+        .then(toys => {
+            toys = _filter(toys, filterBy)
+            toys = _sort(toys, sortBy)
+            return toys
+        })
 }
 
 function getById(toyId) {
-    return httpService.get(BASE_URL + toyId)
+    return storageService.get(STORAGE_KEY, toyId)
 }
 
 function remove(toyId) {
-    return httpService.delete(BASE_URL + toyId)
+    return storageService.remove(STORAGE_KEY, toyId)
 }
 
 function save(toy) {
     if (toy._id) {
-        return httpService.put(BASE_URL, toy)
+        return storageService.put(STORAGE_KEY, toy)
     } else {
-        return httpService.post(BASE_URL, toy)
+        return storageService.post(STORAGE_KEY, toy)
     }
 }
 
@@ -60,34 +63,6 @@ function getEmptyToy() {
         inStock: true,
     }
 }
-
-function getDefaultSort() {
-    return { field: 'name', dir: 1 }
-}
-
-function getFilterFromSearchParams(searchParams) {
-    const defaultFilter = getDefaultFilter()
-    const filterBy = {}
-    for (const field in defaultFilter) {
-        if (field === 'pageIdx') {
-            filterBy[field] = parseInt(searchParams.get(field))
-            if (isNaN(filterBy[field])) filterBy[field] = undefined
-        } else {
-            filterBy[field] = searchParams.get(field) || ''
-        }
-    }
-    return filterBy
-}
-
-function getSortFromSearchParams(searchParams) {
-    const defaultSort = getDefaultSort()
-    const sortBy = {}
-    for (const field in defaultSort) {
-        sortBy[field] = searchParams.get(field) || ''
-    }
-    return sortBy
-}
-
 
 function _getRandomName() {
     const names = ['Teddy Bear', 'Action Figure', 'Doll', 'Lego Set', 'Puzzle', 'Race Car', 'Drone', 'Board Game']
@@ -120,5 +95,33 @@ function _createRandomToys() {
         }
     }
     utilService.saveToStorage(STORAGE_KEY, toys)
-    console.log(JSON.stringify(toys))
+}
+
+
+function _filter(toys, filterBy) {
+    if (filterBy.name) {
+        const regExp = new RegExp(filterBy.name, 'i')
+        toys = toys.filter(toy => regExp.test(toy.name))
+    }
+    if (filterBy.inStock === 'inStock') {
+        toys = toys.filter(toy => toy.inStock)
+    } else if (filterBy.inStock === 'notInStock') {
+        toys = toys.filter(toy => !toy.inStock)
+    }
+
+    if (filterBy.labels.length) {
+        toys = toys.filter(toy => toy.labels.some(label => filterBy.labels.includes(label)))
+    }
+    return toys
+}
+
+function _sort(toys, sortBy) {
+    if (sortBy.field === 'name') {
+        toys = toys.toSorted((t1, t2) => t1.name.localeCompare(t2.name) * sortBy.dir)
+    } else if (sortBy.field === 'price') {
+        toys = toys.toSorted((t1, t2) => (t2.price - t1.price) * sortBy.dir)
+    } else if (sortBy.field === 'createdAt') {
+        toys = toys.toSorted((t1, t2) => (t2.createdAt - t1.createdAt) * sortBy.dir)
+    }
+    return toys
 }
