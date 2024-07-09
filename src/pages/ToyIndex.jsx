@@ -22,7 +22,7 @@ export function ToyIndex() {
             })
     }, [filterBy])
 
-    function onAddToy() {
+    function onAddRandomToy() {
         const toyToSave = toyService.getRandomToy()
         saveToy(toyToSave)
             .then((savedToy) => {
@@ -31,6 +31,10 @@ export function ToyIndex() {
             .catch(err => {
                 showErrorMsg('Cannot add toy')
             })
+    }
+
+    function onAddToy() {
+        navigate('/toy/edit')
     }
 
     function onMoveToToy(toyId) {
@@ -57,7 +61,8 @@ export function ToyIndex() {
 
     return (
         <section className="toy-index">
-            <button onClick={onAddToy} className="btn btn-add">Add Random Toy</button>
+            <button onClick={onAddRandomToy} className="btn btn-add">Add Random Toy</button>
+            <button onClick={onAddToy} className="btn btn-add">Add Toy</button>
             <ToyList toys={toys} onMoveToToy={onMoveToToy} onRemoveToy={onRemoveToy} onEditToy={onEditToy} />
         </section>
     )
