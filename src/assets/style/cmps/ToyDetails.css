@@ -1,3 +1,42 @@
-.toy-details {
+.toy-details-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.toy-details-container h1 {
+    font-size: 2.5em;
+    margin-block-end: .1em;
+}
+
+.toy-details-container p {
+    color: var(--clr1bg);
+    font-size: 1.5em;
+}
+
+.toy-details-container img {
+    margin-block: .5em 2em;
+    max-width: 500px;
+}
+
+.toy-details-container hr {
+    width: 100%;
+    opacity: .15;
+}
+
+.btn-checkout {
+    font-size: 1.2em;
+    padding: .6em 2em;
+
+    margin-block: 1em;
+    background-color: var(--clr1bg);
+    color: var(--clr1txt);
+
+    transition: background-color .2s;
+}
+
+.btn-checkout:hover {
+    background-color: var(--clr1bghvr);
+    cursor: pointer;
 }

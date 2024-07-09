@@ -7,6 +7,7 @@
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
+  background-color: #E6F5FF;
 }
 
 h1,
@@ -48,4 +49,8 @@ object {
   display: grid;
   grid-template-rows: auto 1fr auto ;
   min-height: 100vh;
+}
+
+.btn {
+  border-radius: .4em;
 }

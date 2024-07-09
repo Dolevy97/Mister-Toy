@@ -3,12 +3,15 @@ import { utilService } from './util.service.js'
 
 const STORAGE_KEY = 'toyDB'
 
+_createRandomToys()
+
 export const toyService = {
     query,
     getById,
     save,
     remove,
     getRandomToy,
+    getEmptyToy,
     getDefaultFilter
 }
 
@@ -40,6 +43,26 @@ function getDefaultFilter() {
     return { name: '', inStock: '', labels: [] }
 }
 
+function getRandomToy() {
+    return {
+        _id: utilService.makeId(),
+        name: _getRandomName(),
+        price: _getRandomPrice(),
+        labels: _getRandomLabels(),
+        createdAt: Date.now(),
+        inStock: true,
+    }
+}
+
+function getEmptyToy() {
+    return {
+        name: '',
+        price: '',
+        labels: [],
+        inStock: true,
+    }
+}
+
 function _getRandomName() {
     const names = ['Teddy Bear', 'Action Figure', 'Doll', 'Lego Set', 'Puzzle', 'Race Car', 'Drone', 'Board Game']
     return names[Math.floor(Math.random() * names.length)]
@@ -62,12 +85,13 @@ function _getRandomLabels() {
     return labels
 }
 
-function getRandomToy() {
-    return {
-        name: _getRandomName(),
-        price: _getRandomPrice(),
-        labels: _getRandomLabels(),
-        createdAt: Date.now(),
-        inStock: true,
+function _createRandomToys() {
+    let toys = utilService.loadFromStorage(STORAGE_KEY)
+    if (!toys || !toys.length) {
+        toys = []
+        for (var i = 0; i < 5; i++) {
+            toys.push(getRandomToy())
+        }
     }
+    utilService.saveToStorage(STORAGE_KEY, toys)
 }

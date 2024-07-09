@@ -1,0 +1,63 @@
+.toy-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 200px;
+    width: 300px;
+
+    padding-block: .5em 1em;
+    margin-block: 1.5em;
+
+    background-color: azure;
+    border-radius: 1em;
+    text-align: center;
+    box-shadow: 0 1px 2px 0 var(--clr1bg);
+
+    transition: box-shadow .3s;
+}
+
+.toy-container:hover {
+    box-shadow: 0 1px 4px 1px var(--clr1bg);
+    cursor: pointer;
+}
+
+
+.toy-container h2 {
+    font-weight: 600;
+    font-size: 1.7em;
+}
+
+.toy-container p {
+    font-size: 1.2em;
+}
+
+.btns-container {
+    display: flex;
+    gap: .5em;
+}
+
+.btns-container *, .btn-add {
+    padding: .3em .6em;
+    border: 1px solid black;
+
+    transition: background-color .3s, color .3s;
+}
+
+.btns-container *:hover, .btn-add:hover {
+    cursor: pointer;
+    background-color: var(--clr1bg);
+    color: var(--clr1txt);
+}
+
+
+
+.toy-index {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-block-start: 1em;
+}

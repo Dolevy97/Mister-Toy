@@ -12,6 +12,8 @@
 
 /* Toys */
 @import 'cmps/ToyDetails.css';
+@import 'cmps/ToyList.css';
+@import 'cmps/ToyEdit.css';
 
 
 /* Misc */

@@ -1,0 +1,25 @@
+.toy-edit h2 {
+    text-align: center;
+    margin-block: 1em 2em;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 1em;
+}
+
+.edit-btns {
+    display: flex;
+    gap: 1em;
+}
+
+.edit-form input[type='number'] {
+    width: 100px;
+}
+
+.edit-form input[type='text'] {
+    width: 200px;
+}

@@ -2,11 +2,12 @@
     background-color: lightgray;
     padding: 1.5em 2.5em;
     position: fixed;
-    bottom: 0;
-    right: 1em;
+    bottom: .3em;
+    left: .3em;
     color: white;
     border-radius: 2px;
     font-size: 1.1em;
+    box-shadow: 0 0 3px 1px rgb(0 0 0 / 0.5);
 }
 
 .user-msg.success {
@@ -18,7 +19,9 @@
 }
 
 .user-msg button {
+    position: absolute;
+    top: 0;
+    right: 0;
     font-size: .8em;
-    float: right;
-    margin: .5em;
+    margin: .3em;
 }
