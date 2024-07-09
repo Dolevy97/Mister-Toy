@@ -32,7 +32,8 @@ export function ToyEdit() {
     function onSaveToy(ev) {
         ev.preventDefault()
         if (!Array.isArray(toyToEdit.labels)) {
-            const splitLabels = toyToEdit.labels.split(',')
+            let splitLabels = toyToEdit.labels.split(',')
+            splitLabels = splitLabels.map(label => label.trim())
             toyToEdit.labels = splitLabels
         }
         saveToy(toyToEdit)
@@ -56,10 +57,10 @@ export function ToyEdit() {
 
             <form onSubmit={onSaveToy} className="edit-form">
                 <label htmlFor="name">Name:</label>
-                <input name="name" onChange={handleChange} type="text" id="name" value={name} placeholder="Enter a name" />
+                <input required name="name" onChange={handleChange} type="text" id="name" value={name} placeholder="Enter a name" />
 
                 <label htmlFor="price">Price:</label>
-                <input name="price" onChange={handleChange} type="number" id="price" value={price} placeholder="Enter a price" />
+                <input required name="price" onChange={handleChange} type="number" id="price" value={price} placeholder="Enter a price" />
 
                 <label htmlFor="labels">Labels:</label>
                 <input name="labels" onChange={handleChange} type="text" id="labels" value={labels} placeholder="Labels (separated by commas)" />

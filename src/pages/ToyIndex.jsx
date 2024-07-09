@@ -1,11 +1,12 @@
 import { toyService } from "../services/toy.service.js";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
-import { loadToys, removeToy, saveToy } from "../store/actions/toy.actions.js";
+import { loadToys, removeToy, saveToy, setFilterBy } from "../store/actions/toy.actions.js";
 
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ToyList } from "../cmps/ToyList.jsx";
 import { useNavigate } from "react-router-dom";
+import { ToyFilter } from "../cmps/ToyFilter.jsx";
 
 export function ToyIndex() {
 
@@ -52,10 +53,13 @@ export function ToyIndex() {
     function onEditToy(ev, toyId) {
         ev.stopPropagation()
         navigate(`/toy/edit/${toyId}`)
-
     }
 
-    console.log(toys)
+    function onSetFilter(filter) {
+        setFilterBy(filter)
+    }
+
+    // console.log(toys)
 
     if (!toys.length) return <h2>Loading toys..</h2>
 
@@ -63,6 +67,7 @@ export function ToyIndex() {
         <section className="toy-index">
             <button onClick={onAddRandomToy} className="btn btn-add">Add Random Toy</button>
             <button onClick={onAddToy} className="btn btn-add">Add Toy</button>
+            <ToyFilter toys={toys} filterBy={filterBy} onSetFilter={onSetFilter} />
             <ToyList toys={toys} onMoveToToy={onMoveToToy} onRemoveToy={onRemoveToy} onEditToy={onEditToy} />
         </section>
     )

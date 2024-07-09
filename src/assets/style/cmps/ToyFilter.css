@@ -1,0 +1,24 @@
+.toy-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    
+    padding: 2em;
+    
+    background-color: var(--clr1bg);
+    color: var(--clr1txt);
+
+    border-radius: 12px;
+}
+
+.toy-filter h2 {
+    font-weight: 400;
+}
+
+.toy-filter form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5em;
+}

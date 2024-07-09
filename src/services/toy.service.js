@@ -19,6 +19,7 @@ function query(filterBy = {}) {
     return storageService.query(STORAGE_KEY)
         .then(toys => {
             // add filter logic
+            toys = _filter(toys, filterBy)
             return toys
         })
 }
@@ -94,4 +95,22 @@ function _createRandomToys() {
         }
     }
     utilService.saveToStorage(STORAGE_KEY, toys)
+}
+
+
+function _filter(toys, filterBy) {
+    if (filterBy.name) {
+        const regExp = new RegExp(filterBy.name, 'i')
+        toys = toys.filter(toy => regExp.test(toy.name))
+    }
+    if (filterBy.inStock === 'inStock') {
+        toys = toys.filter(toy => toy.inStock)
+    } else if (filterBy.inStock === 'notInStock') {
+        toys = toys.filter(toy => !toy.inStock)
+    }
+
+    if (filterBy.labels.length) {
+        toys = toys.filter(toy => toy.labels.some(label => filterBy.labels.includes(label)))
+    }
+    return toys
 }
