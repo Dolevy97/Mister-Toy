@@ -15,11 +15,11 @@ export const toyService = {
     getDefaultFilter
 }
 
-function query(filterBy = {}) {
+function query(filterBy = {}, sortBy = {}) {
     return storageService.query(STORAGE_KEY)
         .then(toys => {
-            // add filter logic
             toys = _filter(toys, filterBy)
+            toys = _sort(toys, sortBy)
             return toys
         })
 }
@@ -111,6 +111,17 @@ function _filter(toys, filterBy) {
 
     if (filterBy.labels.length) {
         toys = toys.filter(toy => toy.labels.some(label => filterBy.labels.includes(label)))
+    }
+    return toys
+}
+
+function _sort(toys, sortBy) {
+    if (sortBy.field === 'name') {
+        toys = toys.toSorted((t1, t2) => t1.name.localeCompare(t2.name) * sortBy.dir)
+    } else if (sortBy.field === 'price') {
+        toys = toys.toSorted((t1, t2) => (t2.price - t1.price) * sortBy.dir)
+    } else if (sortBy.field === 'createdAt') {
+        toys = toys.toSorted((t1, t2) => (t2.createdAt - t1.createdAt) * sortBy.dir)
     }
     return toys
 }

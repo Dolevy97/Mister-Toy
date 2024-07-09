@@ -1,17 +1,19 @@
 import { toyService } from "../services/toy.service.js";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
-import { loadToys, removeToy, saveToy, setFilterBy } from "../store/actions/toy.actions.js";
+import { loadToys, removeToy, saveToy, setFilterBy, setSortBy } from "../store/actions/toy.actions.js";
 
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ToyList } from "../cmps/ToyList.jsx";
 import { useNavigate } from "react-router-dom";
 import { ToyFilter } from "../cmps/ToyFilter.jsx";
+import { ToySort } from "../cmps/ToySort.jsx";
 
 export function ToyIndex() {
 
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
+    const sortBy = useSelector(storeState => storeState.toyModule.sortBy)
 
     const navigate = useNavigate()
 
@@ -21,7 +23,7 @@ export function ToyIndex() {
                 showErrorMsg('Cannot load toys!')
                 console.log('Cannot load toys! err:', err)
             })
-    }, [filterBy])
+    }, [filterBy, sortBy])
 
     function onAddRandomToy() {
         const toyToSave = toyService.getRandomToy()
@@ -59,7 +61,9 @@ export function ToyIndex() {
         setFilterBy(filter)
     }
 
-    // console.log(toys)
+    function onSetSort(sort) {
+        setSortBy(sort)
+    }
 
     if (!toys.length) return <h2>Loading toys..</h2>
 
@@ -67,7 +71,10 @@ export function ToyIndex() {
         <section className="toy-index">
             <button onClick={onAddRandomToy} className="btn btn-add">Add Random Toy</button>
             <button onClick={onAddToy} className="btn btn-add">Add Toy</button>
-            <ToyFilter toys={toys} filterBy={filterBy} onSetFilter={onSetFilter} />
+            <section className="filter-and-sort">
+                <ToyFilter toys={toys} filterBy={filterBy} onSetFilter={onSetFilter} />
+                <ToySort sortBy={sortBy} onSetSort={onSetSort} />
+            </section>
             <ToyList toys={toys} onMoveToToy={onMoveToToy} onRemoveToy={onRemoveToy} onEditToy={onEditToy} />
         </section>
     )
