@@ -56,7 +56,7 @@ export function ToyFilter({ toys, filterBy, onSetFilter }) {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={filterByToEdit.inStock || "All"}
+                    value={filterByToEdit.inStock || "all"}
                     onChange={handleChange}
                     name="inStock"
                 >

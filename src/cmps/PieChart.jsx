@@ -10,7 +10,6 @@ import {
     ArcElement
 } from 'chart.js'
 
-import { Bar } from 'react-chartjs-2'
 import { Pie } from 'react-chartjs-2';
 import { toyService } from '../services/toy.service'
 
@@ -24,7 +23,7 @@ ChartJS.register(
     Legend
 )
 
-export function MyDashboard() {
+export function PieChart() {
     const [labels, setLabels] = useState(null)
     const [values, setValues] = useState(null)
 
@@ -35,31 +34,7 @@ export function MyDashboard() {
                 setValues(stats.values)
             })
     }, [labels])
-
-    const options = {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Inventory by Labels',
-            },
-        },
-    }
-
-    const data = {
-        labels,
-        datasets: [
-            {
-                label: 'Inventory by Labels',
-                data: values,
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            },
-        ],
-    }
-
+    
     const pieData = {
         labels,
         datasets: [
@@ -91,12 +66,8 @@ export function MyDashboard() {
         ],
     };
 
-    if (!labels || !values) return <h3>Loading..</h3>
+    // if (!labels || !values) return <h3>Loading..</h3>
     return (
-        <>
-            <Bar options={options} data={data} style={{ width: '60vw', height: '40vh' }} />
-            <hr />
-            <Pie data={pieData} />
-        </>
+        <Pie data={pieData} style={{ width: '60vw', height: '40vh' }} />
     )
 }

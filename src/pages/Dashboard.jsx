@@ -1,11 +1,14 @@
-import { MyDashboard } from "../cmps/MyDashboard";
+import { BarChart } from "../cmps/BarChart";
+import { PieChart } from "../cmps/PieChart";
 
 export function Dashboard() {
     return (
         <section className="dashboard">
-            <h2>Dashboard</h2>
+            <h1>Dashboard</h1>
             <article className="dashboard-container">
-                <MyDashboard />
+                <PieChart />
+                <hr />
+                <BarChart />
             </article>
         </section>
     )

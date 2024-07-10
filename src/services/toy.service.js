@@ -14,7 +14,8 @@ export const toyService = {
     getDefaultSort,
     getFilterFromSearchParams,
     getSortFromSearchParams,
-    getInventoryStats
+    getInventoryStats,
+    getPriceStats
 }
 
 function query(filterBy = {}, sortBy = {}) {
@@ -96,7 +97,7 @@ function getInventoryStats() {
             const toyCountByInventoryMap = _getToyCountByInventoryMap(toys)
             const labels = Object.keys(toyCountByInventoryMap)
             const values = Object.values(toyCountByInventoryMap)
-            return {labels, values}
+            return { labels, values }
         })
 }
 
@@ -111,6 +112,28 @@ function _getToyCountByInventoryMap(toys) {
     }, {})
     return toyCountByImportanceMap
 }
+
+function getPriceStats() {
+    return httpService.get(BASE_URL)
+        .then(toys => {
+            const toyCountByPriceMap = _getToyCountByPriceMap(toys)
+            const labels = Object.keys(toyCountByPriceMap)
+            const values = Object.values(toyCountByPriceMap)
+            return { labels, values }
+        })
+}
+
+function _getToyCountByPriceMap(toys) {
+    const toyCountByPriceMap = toys.reduce((map, toy) => {
+        toy.labels.forEach(label => {
+            if (!map[label]) map[label] = 0
+            map[label] += +toy.price
+        })
+        return map
+    }, {})
+    return toyCountByPriceMap
+}
+
 
 
 function _getRandomName() {

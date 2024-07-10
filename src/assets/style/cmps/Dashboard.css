@@ -1,0 +1,12 @@
+.dashboard {
+    text-align: center;
+}
+
+.dashboard h1 {
+    font-size: 2em;
+    font-weight: 500;
+}
+
+.dashboard-container hr {
+    margin-block: 1.5em;
+}

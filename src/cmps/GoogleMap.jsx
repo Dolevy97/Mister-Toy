@@ -30,7 +30,7 @@ export function GoogleMap() {
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyC3JYJV46HLqEVYXfj9bo5_b4yO0UOD_WI" }}
           center={coords}
-          defaultZoom={zoom}
+          zoom={zoom}
           onClick={onHandleClick}
         >
           <AnyReactComponent

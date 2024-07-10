@@ -15,7 +15,6 @@ export function About() {
                 <h1>Our Branches</h1>
                 <p>We have branches all around the country, and we're steadily growing!</p>
             </div>
-
             <GoogleMap />
         </section>
     )
