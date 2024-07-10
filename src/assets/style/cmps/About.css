@@ -1,0 +1,21 @@
+.about h1 {
+    font-size: 2em;
+    text-align: center;
+}
+
+.about-branches {
+    margin-block-start: 3em;
+    text-align: center;
+}
+
+.about-btns-container {
+    display: flex;
+    gap: .5em;
+    margin: 2em auto;
+    width: fit-content;
+}
+
+.about-btns-container Button {
+    text-transform: capitalize;
+    font-weight: 400;
+}

@@ -11,6 +11,7 @@ import { ToyDetails } from './pages/ToyDetails.jsx'
 import { UserMsg } from './cmps/UserMsg.jsx'
 import { ToyEdit } from './pages/ToyEdit.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
+import { About } from './pages/About.jsx'
 
 export function App() {
 
@@ -26,6 +27,7 @@ export function App() {
               <Route element={<ToyDetails />} path="/toy/:toyId" />
               <Route element={<ToyEdit />} path="/toy/edit/:toyId?" />
               <Route element={<Dashboard />} path="/dashboard" />
+              <Route element={<About />} path="/about" />
             </Routes>
           </main>
           <AppFooter />

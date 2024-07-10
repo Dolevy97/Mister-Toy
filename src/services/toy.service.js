@@ -89,18 +89,18 @@ function getSortFromSearchParams(searchParams) {
     return sortBy
 }
 
+
 function getInventoryStats() {
     return httpService.get(BASE_URL)
         .then(toys => {
             const toyCountByInventoryMap = _getToyCountByInventoryMap(toys)
-            // const data = Object.keys(toyCountByInventoryMap).map(speedName => ({ title: speedName, value: toyCountByImportanceMap[speedName] }))
-            // return data
+            const labels = Object.keys(toyCountByInventoryMap)
+            const values = Object.values(toyCountByInventoryMap)
+            return {labels, values}
         })
-
 }
 
 function _getToyCountByInventoryMap(toys) {
-    console.log(toys)
     const toyCountByImportanceMap = toys.reduce((map, toy) => {
         if (toy.inStock) {
             toy.labels.forEach(label => {
@@ -109,7 +109,6 @@ function _getToyCountByInventoryMap(toys) {
         }
         return map
     }, {})
-    console.log(toyCountByImportanceMap)
     return toyCountByImportanceMap
 }
 
