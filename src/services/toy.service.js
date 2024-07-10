@@ -13,7 +13,8 @@ export const toyService = {
     getDefaultFilter,
     getDefaultSort,
     getFilterFromSearchParams,
-    getSortFromSearchParams
+    getSortFromSearchParams,
+    getInventoryStats
 }
 
 function query(filterBy = {}, sortBy = {}) {
@@ -88,6 +89,30 @@ function getSortFromSearchParams(searchParams) {
     return sortBy
 }
 
+function getInventoryStats() {
+    return httpService.get(BASE_URL)
+        .then(toys => {
+            const toyCountByInventoryMap = _getToyCountByInventoryMap(toys)
+            // const data = Object.keys(toyCountByInventoryMap).map(speedName => ({ title: speedName, value: toyCountByImportanceMap[speedName] }))
+            // return data
+        })
+
+}
+
+function _getToyCountByInventoryMap(toys) {
+    console.log(toys)
+    const toyCountByImportanceMap = toys.reduce((map, toy) => {
+        if (toy.inStock) {
+            toy.labels.forEach(label => {
+                map[label] = (map[label] || 0) + 1
+            })
+        }
+        return map
+    }, {})
+    console.log(toyCountByImportanceMap)
+    return toyCountByImportanceMap
+}
+
 
 function _getRandomName() {
     const names = ['Teddy Bear', 'Action Figure', 'Doll', 'Lego Set', 'Puzzle', 'Race Car', 'Drone', 'Board Game']
@@ -109,16 +134,4 @@ function _getRandomLabels() {
         }
     }
     return labels
-}
-
-function _createRandomToys() {
-    let toys = utilService.loadFromStorage(STORAGE_KEY)
-    if (!toys || !toys.length) {
-        toys = []
-        for (var i = 0; i < 10; i++) {
-            toys.push(getRandomToy())
-        }
-    }
-    utilService.saveToStorage(STORAGE_KEY, toys)
-    console.log(JSON.stringify(toys))
 }

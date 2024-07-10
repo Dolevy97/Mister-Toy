@@ -4,14 +4,15 @@
     gap: 1em;
 }
 
-.toy-filter, .toy-sort {
+.toy-filter,
+.toy-sort {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
-    
+
     padding: 2em;
-    
+
     background-color: var(--clr1bg);
     color: var(--clr1txt);
 
@@ -27,4 +28,23 @@
     flex-direction: column;
     align-items: center;
     gap: .5em;
+}
+
+.toy-filter form * {
+    color: var(--clr1txt);
+    border-color: var(--clr1txt);
+}
+
+.sort-btn-group Button:not(.active) {
+    font-weight: 300;
+}
+
+.sort-btn-group *:hover{
+    box-shadow: 0 0 1px 1px var(--clr1txt);
+}
+
+.toy-filter form * div:hover{
+    border-color: white;
+    outline-color: white;
+    color: white;
 }

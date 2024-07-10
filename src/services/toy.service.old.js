@@ -97,7 +97,6 @@ function _createRandomToys() {
     utilService.saveToStorage(STORAGE_KEY, toys)
 }
 
-
 function _filter(toys, filterBy) {
     if (filterBy.name) {
         const regExp = new RegExp(filterBy.name, 'i')

@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { ToyPreview } from "./ToyPreview.jsx";
 
 export function ToyList({ toys, onMoveToToy, onRemoveToy, onEditToy }) {
@@ -8,9 +9,9 @@ export function ToyList({ toys, onMoveToToy, onRemoveToy, onEditToy }) {
                     <ToyPreview toy={toy} />
 
                     <div className="btns-container">
-                        <button onClick={(ev) => onRemoveToy(ev, toy._id)} className="btn btn-remove">X</button>
-                        <button onClick={(ev) => onEditToy(ev, toy._id)} className="btn btn-edit">Edit</button>
-                        <button className="btn btn-buy">Buy</button>
+                        <Button size="small" variant="text" color="inherit" onClick={(ev) => onRemoveToy(ev, toy._id)} className="btn btn-remove">X</Button>
+                        <Button size="small" variant="text" color="inherit" onClick={(ev) => onEditToy(ev, toy._id)} className="btn btn-edit">Edit</Button>
+                        <Button size="small" variant="text" color="inherit" className="btn btn-buy" disabled={!toy.inStock}>Buy</Button>
                     </div>
                 </article>)}
         </section>

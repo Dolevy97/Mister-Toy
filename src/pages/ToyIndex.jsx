@@ -8,6 +8,7 @@ import { ToyList } from "../cmps/ToyList.jsx";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ToyFilter } from "../cmps/ToyFilter.jsx";
 import { ToySort } from "../cmps/ToySort.jsx";
+import { Button } from "@mui/material";
 
 export function ToyIndex() {
 
@@ -79,13 +80,12 @@ export function ToyIndex() {
     if (!toys) return <h2>Loading toys..</h2>
     return (
         <section className="toy-index">
-            <button onClick={onAddRandomToy} className="btn btn-add">Add Random Toy</button>
-            <button onClick={onAddToy} className="btn btn-add">Add Toy</button>
+            <Button color="info" variant="contained" onClick={onAddToy} className="btn btn-add">Add Toy</Button>
             <section className="filter-and-sort">
                 <ToyFilter toys={toys} filterBy={filterBy} onSetFilter={onSetFilter} />
                 <ToySort sortBy={sortBy} onSetSort={onSetSort} />
             </section>
-            {toys.length && <ToyList toys={toys} onMoveToToy={onMoveToToy} onRemoveToy={onRemoveToy} onEditToy={onEditToy} />}
+            {toys.length && <ToyList toys={toys} onMoveToToy={onMoveToToy} onRemoveToy={onRemoveToy} onEditToy={onEditToy} /> || null}
         </section>
     )
 }

@@ -3,6 +3,7 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { toyService } from "../services/toy.service.js"
 import { saveToy } from "../store/actions/toy.actions.js"
 import { Link, useNavigate, useParams } from "react-router-dom"
+import { MyForm } from "../cmps/MyForm.jsx"
 
 export function ToyEdit() {
     const navigate = useNavigate()
@@ -30,7 +31,7 @@ export function ToyEdit() {
     }
 
     function onSaveToy(ev) {
-        ev.preventDefault()
+        // ev.preventDefault()
         if (!Array.isArray(toyToEdit.labels)) {
             let splitLabels = toyToEdit.labels.split(',')
             splitLabels = splitLabels.map(label => label.trim())
@@ -47,32 +48,10 @@ export function ToyEdit() {
             })
     }
 
-    // console.log(toyToEdit)
-
-    const { name, price, labels, inStock } = toyToEdit
-
     return (
         <section className="toy-edit">
             <h2>{toyToEdit._id ? 'Edit' : 'Add'} Toy</h2>
-
-            <form onSubmit={onSaveToy} className="edit-form">
-                <label htmlFor="name">Name:</label>
-                <input required name="name" onChange={handleChange} type="text" id="name" value={name} placeholder="Enter a name" />
-
-                <label htmlFor="price">Price:</label>
-                <input required name="price" onChange={handleChange} type="number" id="price" value={price} placeholder="Enter a price" />
-
-                <label htmlFor="labels">Labels:</label>
-                <input name="labels" onChange={handleChange} type="text" id="labels" value={labels} placeholder="Labels (separated by commas)" />
-
-                <label htmlFor="inStock">In stock?</label>
-                <input name="inStock" onChange={handleChange} type="checkbox" id="inStock" checked={inStock} />
-
-                <div className="edit-btns">
-                    <button>{toyToEdit._id ? 'Save' : 'Add'}</button>
-                    <Link to="/toy">Cancel</Link>
-                </div>
-            </form>
+            <MyForm onSaveToy={onSaveToy} toyToEdit={toyToEdit} handleChange={handleChange} />
         </section>
     )
 }

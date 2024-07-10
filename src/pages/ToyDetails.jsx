@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toyService } from "../services/toy.service";
+import { Button } from "@mui/material";
 
 
 export function ToyDetails() {
@@ -22,7 +23,7 @@ export function ToyDetails() {
             <img className="toy-image" src="https://images.unsplash.com/photo-1581557991964-125469da3b8a?q=80&w=1433&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" title="Image" />
             <p>${toy.price}</p>
             <h3>{toy.inStock ? 'Currently in stock!' : 'Out of stock'}</h3>
-            <button className="btn btn-checkout">{toy.inStock ? 'Buy now!' : "Notify me when available"}</button>
+            <Button size="large" variant="contained" className="btn btn-checkout">{toy.inStock ? 'Buy now!' : "Notify me when available"}</Button>
         </article>
     )
 }

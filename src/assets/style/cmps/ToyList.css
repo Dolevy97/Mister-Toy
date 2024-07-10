@@ -45,7 +45,7 @@
     transition: background-color .3s, color .3s;
 }
 
-.btns-container *:hover, .btn-add:hover {
+.btns-container *:hover:not([disabled]), .btn-add:hover {
     cursor: pointer;
     background-color: var(--clr1bg);
     color: var(--clr1txt);
@@ -56,12 +56,8 @@
 .toy-index {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    gap: .5em;
 
     margin-block-start: 1em;
-}
-
-.btn-add {
-    margin-block: .5em;
 }

@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState } from "react"
 import { utilService } from "../services/util.service.js"
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js"
+import { MySelect } from "./MySelect.jsx"
+import { MenuItem, Select, TextField } from "@mui/material"
 
 
 export function ToyFilter({ toys, filterBy, onSetFilter }) {
@@ -21,12 +23,7 @@ export function ToyFilter({ toys, filterBy, onSetFilter }) {
     function handleChange({ target }) {
         let { value, name: field, type, selectedOptions } = target
         value = type === 'number' ? +value : value
-        if (field === 'labels') {
-            const options = Array.from(selectedOptions).map(option => option.value)
-            setFilterByToEdit(prevFilter => ({ ...prevFilter, labels: options }))
-        } else {
-            setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
-        }
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
     function getLabels() {
@@ -39,31 +36,34 @@ export function ToyFilter({ toys, filterBy, onSetFilter }) {
         setLabels(Array.from(labelSet))
     }
 
+    function onSetLabels(labels) {
+        setFilterByToEdit(prevFilter => ({ ...prevFilter, labels }))
+    }
+
     return (
         <section className="toy-filter">
             <h2>Toys Filter</h2>
             <form>
-                <label htmlFor="name">Name: </label>
-                <input type="text"
-                    id="name"
-                    name="name"
-                    placeholder="By name"
-                    value={filterByToEdit.txt}
-                    onChange={handleChange}
-                />
-                <label htmlFor="stock">By stock: </label>
-                <select onChange={handleChange} name="inStock" id="stock">
-                    <option value="all">All</option>
-                    <option value="inStock">In stock</option>
-                    <option value="notInStock">Not in stock</option>
-                </select>
 
-                <label htmlFor="labels">By labels:(Hold ctrl and click)</label>
-                <select onChange={handleChange} name="labels" id="labels" multiple>
-                    {labels && labels.map(label =>
-                        <option value={label} key={label}>{label}</option>
-                    )}
-                </select>
+                <TextField
+                name="name"
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                value={filterByToEdit.txt}
+                onChange={handleChange} />
+                <MySelect labels={labels} onSetLabels={onSetLabels} />
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={filterByToEdit.inStock || "All"}
+                    onChange={handleChange}
+                    name="inStock"
+                >
+                    <MenuItem value="all">All</MenuItem>
+                    <MenuItem value="inStock">In stock</MenuItem>
+                    <MenuItem value="notInStock">Not in stock</MenuItem>
+                </Select>
             </form>
 
         </section>
