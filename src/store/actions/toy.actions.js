@@ -38,6 +38,7 @@ export async function saveToy(toy) {
     try {
         const savedToy = await toyService.save(toy)
         store.dispatch({ type, toy: savedToy })
+        console.log(savedToy)
         return savedToy
     } catch (err) {
         console.log('toy action -> Cannot save toy', err)

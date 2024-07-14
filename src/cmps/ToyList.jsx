@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 export function ToyList({ toys, onMoveToToy, onRemoveToy, onEditToy }) {
     const user = useSelector(storeState => storeState.userModule.loggedInUser)
 
+    console.log(toys)
     return (
         <section className="toys-list">
             {toys.map(toy =>

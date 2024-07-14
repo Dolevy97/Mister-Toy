@@ -55,8 +55,10 @@ async function save(toy) {
     try {
         if (toy._id) {
             await httpService.put(BASE_URL, toy)
+            return toy
         } else {
             await httpService.post(BASE_URL, toy)
+            return toy
         }
     } catch (error) {
         console.error('Error saving toy:', error)
