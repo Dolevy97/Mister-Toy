@@ -11,14 +11,15 @@ const SignupSchema = Yup.object().shape({
 
 
 
-export function LoginForm({ onSubmit, handleChange }) {
+export function LoginForm({ onSubmit, handleChange, setIsSignup, isSignup }) {
     return (
         <div className="login-container">
             <Formik
                 enableReinitialize
                 initialValues={{
                     username: '',
-                    password: ''
+                    password: '',
+                    fullname: ''
                 }}
                 validationSchema={SignupSchema}
                 onSubmit={onSubmit}>
@@ -32,12 +33,15 @@ export function LoginForm({ onSubmit, handleChange }) {
                         {errors.password && touched.password && (
                             <div>{errors.password}</div>
                         )}
-
-                        <button type="submit">Continue</button>
+                        {isSignup && <Field name="fullname" type="fullname" placeholder="Enter your full name" />}
+                        {errors.fullname && touched.fullname && (
+                            <div>{errors.fullname}</div>
+                        )}
+                        <button type="submit">{isSignup? 'Sign up': 'Continue'}</button>
                     </Form>
                 )}
             </Formik>
-            <p>Create an account</p>
+            <p onClick={() => setIsSignup(!isSignup)}>{isSignup ? 'Already have an account? Log in' : 'Create an account'}</p>
         </div>
     )
 }

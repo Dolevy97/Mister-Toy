@@ -1,4 +1,6 @@
 .toy-details-container {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,18 +10,71 @@
         margin-block-end: .1em;
     }
 
+    h2 {
+        font-size: 2.1em;
+        font-weight: 400;
+        margin-block: 1em 1.5em;
+        text-align: center;
+
+    }
+
     p {
         color: $clr1txt;
-        font-size: 1.5em;
+        font-size: 1.8em;
+        margin-block-end: 0;
     }
 
     img {
-        margin-block: .5em 2em;
+        margin-block: .5em 1.5em;
         max-width: 500px;
     }
 
     hr {
         width: 100%;
         opacity: .15;
+    }
+
+    .btn-back {
+        position: absolute;
+        left: 0;
+        top: 1rem;
+
+        font-size: 1.5em;
+
+        background-color: inherit;
+        border: none;
+        border-radius: 4px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .messages {
+        form {
+            display: flex;
+            gap: .2em;
+            margin-block: 1em;
+
+            textarea {
+                font-family: inherit;
+                max-width: 60vw;
+                max-height: 10vh;
+            }
+        }
+    }
+
+    .toy-message {
+        position: relative;
+        & * {
+            max-width: 50vw;
+            word-wrap: break-word;
+        }
+
+        .btn-delete {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
     }
 }

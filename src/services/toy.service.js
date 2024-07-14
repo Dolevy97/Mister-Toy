@@ -6,8 +6,10 @@ const BASE_URL = 'toy/'
 export const toyService = {
     query,
     getById,
-    save,
     remove,
+    save,
+    addToyMsg,
+    removeToyMsg,
     getRandomToy,
     getEmptyToy,
     getDefaultFilter,
@@ -58,6 +60,26 @@ async function save(toy) {
         }
     } catch (error) {
         console.error('Error saving toy:', error)
+        throw error
+    }
+}
+
+async function addToyMsg(toyId, txt) {
+    try {
+        const savedMsg = await httpService.post(`${BASE_URL}${toyId}/msg`, { txt })
+        return savedMsg
+    } catch (error) {
+        console.error('Error saving message:', error)
+        throw error
+    }
+}
+
+async function removeToyMsg(toyId, msgId) {
+    try {
+        const res = await httpService.delete(`${BASE_URL}${toyId}/msg/${msgId}`)
+        return res
+    } catch (error) {
+        console.error('Error removing message:', error)
         throw error
     }
 }

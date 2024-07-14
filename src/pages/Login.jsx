@@ -17,12 +17,18 @@ export function Login() {
     }
 
     async function onSubmit() {
+        let newUser = {}
+        if (isSignup) {
+            newUser.fullname = userInfo.fullname
+        }
+        newUser.username = userInfo.username
+        newUser.password = userInfo.password
         try {
             let user
             if (isSignup) {
-                user = await signup(userInfo)
+                user = await signup(newUser)
             } else {
-                user = await login(userInfo)
+                user = await login(newUser)
             }
 
             if (user) {
@@ -39,8 +45,8 @@ export function Login() {
     return (
         <div className="login-signup-container">
             <h2>Mister Toy</h2>
-            <h3>Log in to continue</h3>
-            <LoginForm onSubmit={onSubmit} handleChange={handleChange} />
+            <h3>{isSignup ? 'Sign up to continue' : 'Log in to continue'}</h3>
+            <LoginForm onSubmit={onSubmit} handleChange={handleChange} setIsSignup={setIsSignup} isSignup={isSignup} />
         </div>
     )
 }
