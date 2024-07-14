@@ -54,16 +54,16 @@ export function ToyDetails() {
                 {/* <hr /> */}
 
                 {!toy.msgs.length && 'No messages yet, be the first!'}
-                {user && <form onSubmit={() => onAddMsg(event)}>
+                {user? <form onSubmit={() => onAddMsg(event)}>
                     <textarea name="msgtxt" placeholder="Enter your message"></textarea>
                     <button>Add</button>
-                </form>}
+                </form> : <h3>Log in to add a message!</h3>}
                 {toy.msgs.map(msg =>
                     <article className="toy-message" key={msg.id}>
                         <h5>{msg.by.fullname}:</h5>
                         <h4>{msg.txt}</h4>
                         <hr />
-                        {user.isAdmin && <button onClick={() => onDeleteMsg(msg.id)} title="delete message" className="btn-delete">X</button>}
+                        {user && user.isAdmin && <button onClick={() => onDeleteMsg(msg.id)} title="delete message" className="btn-delete">X</button>}
                     </article>
                 )}
             </section>

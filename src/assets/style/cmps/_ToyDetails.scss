@@ -51,6 +51,7 @@
     }
 
     .messages {
+        text-align: center;
         form {
             display: flex;
             gap: .2em;
@@ -58,8 +59,11 @@
 
             textarea {
                 font-family: inherit;
+                min-width: 20vw;
                 max-width: 60vw;
+                min-height: 4vh;
                 max-height: 10vh;
+                margin: auto;
             }
         }
     }
