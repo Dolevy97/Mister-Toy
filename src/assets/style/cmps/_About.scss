@@ -1,6 +1,10 @@
-.about h1 {
-    font-size: 2em;
-    text-align: center;
+.about {
+    width: 80vw;
+
+    h1 {
+        font-size: 2em;
+        text-align: center;
+    }
 }
 
 .about-branches {
@@ -13,9 +17,9 @@
     gap: .5em;
     margin: 1.5em auto;
     width: fit-content;
-}
 
-.about-btns-container Button {
-    text-transform: capitalize;
-    font-weight: 400;
+    Button {
+        text-transform: capitalize;
+        font-weight: 400;
+    }
 }

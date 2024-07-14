@@ -37,17 +37,6 @@ export function ToyIndex() {
         setSortBy(defaultSort)
     }, [])
 
-    function onAddRandomToy() {
-        const toyToSave = toyService.getRandomToy()
-        saveToy(toyToSave)
-            .then((savedToy) => {
-                showSuccessMsg(`Toy added (id: ${savedToy._id})`)
-            })
-            .catch(err => {
-                showErrorMsg('Cannot add toy')
-            })
-    }
-
     function onAddToy() {
         navigate('/toy/edit')
     }

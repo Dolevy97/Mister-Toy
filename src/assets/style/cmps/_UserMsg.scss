@@ -8,20 +8,20 @@
     border-radius: 2px;
     font-size: 1.1em;
     box-shadow: 0 0 3px 1px rgb(0 0 0 / 0.5);
-}
 
-.user-msg.success {
-    background-color: var(--clr1);
-}
+    &.success {
+        background-color: $clr1
+    }
 
-.user-msg.error {
-    background-color: var(--clr2);
-}
+    &.error {
+    background-color: $clr2;
+    }
 
-.user-msg button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: .8em;
-    margin: .3em;
+    & button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: .8em;
+        margin: .3em;
+    }
 }

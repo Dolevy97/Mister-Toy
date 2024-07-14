@@ -1,0 +1,49 @@
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+}
+
+.carousel {
+    width: 80%;
+    max-width: 800px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.carousel-inner {
+    display: flex;
+    width: 300%;
+    animation: slide 20s infinite linear;
+}
+
+.carousel-item {
+    width: 80%;
+    flex-shrink: 0;
+
+    img {
+        width: 30%;
+        object-fit: cover;
+        border-radius: 16px;
+        opacity: .7;
+    }
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0%);
+    }
+
+    33.33% {
+        transform: translateX(-100%);
+    }
+
+    66.66% {
+        transform: translateX(-200%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}

@@ -1,0 +1,31 @@
+.app-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    height: 33px;
+    width: 100%;
+    background-color: $clr1bg;
+    color: $clr1txt;
+
+    p {
+        margin: 0;
+    }
+
+    .social-links {
+        display: flex;
+        gap: .5em;
+
+        .btn {
+            @include btn;
+
+            &-dark {
+                @include btn($type: dark);
+            }
+        
+            &-light {
+                @include btn($type: light);
+            }
+        }
+    }
+}

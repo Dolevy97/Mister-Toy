@@ -5,13 +5,13 @@ import { Home } from './pages/Home.jsx'
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { AppFooter } from './cmps/AppFooter.jsx'
 import { ToyIndex } from './pages/ToyIndex.jsx'
-
-import "../src/assets/style/main.css"
 import { ToyDetails } from './pages/ToyDetails.jsx'
 import { UserMsg } from './cmps/UserMsg.jsx'
 import { ToyEdit } from './pages/ToyEdit.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { About } from './pages/About.jsx'
+
+import "../src/assets/style/main.scss"
 
 export function App() {
 

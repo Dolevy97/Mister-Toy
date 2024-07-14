@@ -1,32 +1,47 @@
-import { Carousel } from "react-responsive-carousel";
+// import { Carousel } from "react-responsive-carousel";
+
+// export function MyCarousel() {
+//     return (
+//         <Carousel showThumbs={false} autoPlay interval={3000} infiniteLoop>
+//             <div>
+//                 <img src="../src/assets/imgs/image1.jpg" />
+//                 <p className="legend">Legend 1</p>
+//             </div>
+//             <div>
+//                 <img src="../src/assets/imgs/image2.jpg" />
+//                 <p className="legend">Legend 2</p>
+//             </div>
+//             <div>
+//                 <img src="../src/assets/imgs/image3.jpg" />
+//                 <p className="legend">Legend 3</p>
+//             </div>
+//         </Carousel>
+//     )
+// }
+
+// NewHeroCarousel.js
+
+import React from 'react';
+import { Carousel } from 'react-responsive-carousel';
 
 export function MyCarousel() {
     return (
-        <Carousel showThumbs={false} autoPlay interval={3000} infiniteLoop>
-            <div>
-                <img src="path/to/your/image1.jpg" alt="Toy 1" />
-                <div className="legend">
-                    <h2>Discover the Latest Toys!</h2>
-                    <p>Find the perfect toy for every child.</p>
-                    <button className="cta-button">Shop Now</button>
-                </div>
+        <>
+            <div className="carousel-container">
+                <section className="carousel">
+                    <section className="carousel-inner">
+                        <article className="carousel-item">
+                            <img src="../src/assets/imgs/image1.jpg" alt="Slide 1" />
+                        </article>
+                        <article className="carousel-item">
+                            <img src="../src/assets/imgs/image2.jpg" alt="Slide 2" />
+                        </article>
+                        <article className="carousel-item">
+                            <img src="../src/assets/imgs/image3.jpg" alt="Slide 3" />
+                        </article>
+                    </section>
+                </section>
             </div>
-            <div>
-                <img src="path/to/your/image2.jpg" alt="Toy 2" />
-                <div className="legend">
-                    <h2>New Arrivals</h2>
-                    <p>Check out the newest additions to our collection.</p>
-                    <button className="cta-button">Explore</button>
-                </div>
-            </div>
-            <div>
-                <img src="path/to/your/image3.jpg" alt="Toy 3" />
-                <div className="legend">
-                    <h2>Exclusive Deals</h2>
-                    <p>Save big on top toys with our exclusive offers.</p>
-                    <button className="cta-button">Get Deals</button>
-                </div>
-            </div>
-        </Carousel>
-    )
+        </>
+    );
 }

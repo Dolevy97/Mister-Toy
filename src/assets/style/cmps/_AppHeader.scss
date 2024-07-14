@@ -11,25 +11,27 @@
 
     height: 66px;
     width: 100%;
-    background-color: var(--clr1bg);
-    color: var(--clr1txt);
+    background-color: $clr1bg;
+    color: $clr1txt;
+
+    z-index: 5;
 }
 
 .app-nav {
     display: flex;
     gap: 1em;
     margin-block: 1em;
-}
 
-.app-nav a {
-    transition: scale .2s;
-}
+    a {
+        transition: scale .2s;
 
-.app-nav a:hover {
-    scale: 1.1;
-}
+        &:hover {
+            scale: 1.1;
+        }
 
-a.active {
-    text-decoration: underline;
-    text-underline-offset: .35em;
+        &.active {
+            text-decoration: underline;
+            text-underline-offset: .35em;
+        }
+    }
 }

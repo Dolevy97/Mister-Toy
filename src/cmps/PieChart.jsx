@@ -68,6 +68,6 @@ export function PieChart() {
 
     // if (!labels || !values) return <h3>Loading..</h3>
     return (
-        <Pie data={pieData} style={{ width: '60vw', height: '40vh' }} />
+        <Pie data={pieData} style={{ width: '50vw', height: '40vh' }} />
     )
 }

@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { GoogleMap } from "../cmps/GoogleMap";
 
 export function About() {

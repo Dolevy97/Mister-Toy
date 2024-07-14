@@ -18,24 +18,47 @@ export const toyService = {
     getPriceStats
 }
 
-function query(filterBy = {}, sortBy = {}) {
+async function query(filterBy = {}, sortBy = {}) {
     const filterAndSort = { ...filterBy, ...sortBy }
-    return httpService.get(BASE_URL, filterAndSort)
+    try {
+        const res = await httpService.get(BASE_URL, filterAndSort)
+        return res
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error
+    }
 }
 
-function getById(toyId) {
-    return httpService.get(BASE_URL + toyId)
+async function getById(toyId) {
+    try {
+        const res = await httpService.get(BASE_URL + toyId)
+        return res
+    } catch (err) {
+        console.error('Error fetching toy by ID:', err)
+        throw err
+    }
 }
 
-function remove(toyId) {
-    return httpService.delete(BASE_URL + toyId)
+async function remove(toyId) {
+    try {
+        const res = await httpService.delete(BASE_URL + toyId)
+        return res
+    } catch (err) {
+        console.error('Error fetching toy by ID:', err)
+        throw err
+    }
 }
 
-function save(toy) {
-    if (toy._id) {
-        return httpService.put(BASE_URL, toy)
-    } else {
-        return httpService.post(BASE_URL, toy)
+async function save(toy) {
+    try {
+        if (toy._id) {
+            await httpService.put(BASE_URL, toy)
+        } else {
+            await httpService.post(BASE_URL, toy)
+        }
+    } catch (error) {
+        console.error('Error saving toy:', error)
+        throw error
     }
 }
 
@@ -90,7 +113,6 @@ function getSortFromSearchParams(searchParams) {
     return sortBy
 }
 
-
 function getInventoryStats() {
     return httpService.get(BASE_URL)
         .then(toys => {
@@ -133,8 +155,6 @@ function _getToyCountByPriceMap(toys) {
     }, {})
     return toyCountByPriceMap
 }
-
-
 
 function _getRandomName() {
     const names = ['Teddy Bear', 'Action Figure', 'Doll', 'Lego Set', 'Puzzle', 'Race Car', 'Drone', 'Board Game']

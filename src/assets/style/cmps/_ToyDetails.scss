@@ -1,0 +1,25 @@
+.toy-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+        font-size: 2.5em;
+        margin-block-end: .1em;
+    }
+
+    p {
+        color: $clr1txt;
+        font-size: 1.5em;
+    }
+
+    img {
+        margin-block: .5em 2em;
+        max-width: 500px;
+    }
+
+    hr {
+        width: 100%;
+        opacity: .15;
+    }
+}
