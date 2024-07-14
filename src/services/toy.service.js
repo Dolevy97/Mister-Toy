@@ -113,14 +113,17 @@ function getSortFromSearchParams(searchParams) {
     return sortBy
 }
 
-function getInventoryStats() {
-    return httpService.get(BASE_URL)
-        .then(toys => {
-            const toyCountByInventoryMap = _getToyCountByInventoryMap(toys)
-            const labels = Object.keys(toyCountByInventoryMap)
-            const values = Object.values(toyCountByInventoryMap)
-            return { labels, values }
-        })
+async function getInventoryStats() {
+    try {
+        const toys = await httpService.get(BASE_URL)
+        const toyCountByInventoryMap = _getToyCountByInventoryMap(toys)
+        const labels = Object.keys(toyCountByInventoryMap)
+        const values = Object.values(toyCountByInventoryMap)
+        return { labels, values }
+    } catch (err) {
+        console.error('Error getting inventory stats:', err)
+        throw err
+    }
 }
 
 function _getToyCountByInventoryMap(toys) {
@@ -135,14 +138,17 @@ function _getToyCountByInventoryMap(toys) {
     return toyCountByImportanceMap
 }
 
-function getPriceStats() {
-    return httpService.get(BASE_URL)
-        .then(toys => {
-            const toyCountByPriceMap = _getToyCountByPriceMap(toys)
-            const labels = Object.keys(toyCountByPriceMap)
-            const values = Object.values(toyCountByPriceMap)
-            return { labels, values }
-        })
+async function getPriceStats() {
+    try {
+        const toys = await httpService.get(BASE_URL)
+        const toyCountByPriceMap = _getToyCountByPriceMap(toys)
+        const labels = Object.keys(toyCountByPriceMap)
+        const values = Object.values(toyCountByPriceMap)
+        return { labels, values }
+    } catch (err) {
+        console.error('Error getting price stats:', err)
+        throw err
+    }
 }
 
 function _getToyCountByPriceMap(toys) {

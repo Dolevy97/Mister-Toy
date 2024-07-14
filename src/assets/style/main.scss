@@ -1,16 +1,16 @@
-// /* Setup */
+// Setup
 @import 'setup/vars';
 @import 'setup/typography';
 @import 'setup/mixins';
 
-// /* Base */
+// Base
 @import 'base/base';
 @import 'base/layout';
 
 
-// /* Components */
+// Components
 
-// /* Toys */
+// Toys
 @import 'cmps/ToyIndex';
 @import 'cmps/ToyDetails';
 @import 'cmps/ToyList';
@@ -18,7 +18,7 @@
 @import 'cmps/ToyFilter';
 
 
-// /* Misc */
+// Misc
 @import 'cmps/UserMsg';
 @import 'cmps/AppHeader';
 @import 'cmps/AppFooter';
@@ -26,3 +26,7 @@
 @import 'cmps/Home';
 @import 'cmps/Dashboard';
 @import 'cmps/MyCarousel';
+
+// User
+
+@import 'cmps/Login'

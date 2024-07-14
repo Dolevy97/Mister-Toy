@@ -10,6 +10,7 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 import { ToyEdit } from './pages/ToyEdit.jsx'
 import { Dashboard } from './pages/Dashboard.jsx'
 import { About } from './pages/About.jsx'
+import { Login } from './pages/Login.jsx'
 
 import "../src/assets/style/main.scss"
 
@@ -23,6 +24,7 @@ export function App() {
           <main className="main-layout">
             <Routes>
               <Route element={<Home />} path="/" />
+              <Route element={<Login />} path="/login" />
               <Route element={<ToyIndex />} path="/toy" />
               <Route element={<ToyDetails />} path="/toy/:toyId" />
               <Route element={<ToyEdit />} path="/toy/edit/:toyId?" />

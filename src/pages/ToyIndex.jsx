@@ -45,12 +45,14 @@ export function ToyIndex() {
         navigate(`/toy/${toyId}`)
     }
 
-    function onRemoveToy(ev, toyId) {
+    async function onRemoveToy(ev, toyId) {
         ev.stopPropagation()
-        removeToy(toyId)
-            .catch(err => {
-                showErrorMsg('Cannot remove toy')
-            })
+        try {
+            await removeToy(toyId)
+        } catch (err) {
+            showErrorMsg('Cannot remove toy')
+            throw err
+        }
     }
 
     function onEditToy(ev, toyId) {

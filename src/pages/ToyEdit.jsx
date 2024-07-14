@@ -14,13 +14,14 @@ export function ToyEdit() {
         if (toyId) loadToy()
     }, [])
 
-    function loadToy() {
-        toyService.getById(toyId)
-            .then(setToyToEdit)
-            .catch(err => {
-                console.log('Had issues in toy edit', err)
-                navigate('/toy')
-            })
+    async function loadToy() {
+        try {
+            const toy = await toyService.getById(toyId)
+            setToyToEdit(toy)
+        } catch (err) {
+            console.log('Had issues in toy edit', err)
+            navigate('/toy')
+        }
     }
 
     function handleChange({ target }) {
@@ -30,22 +31,21 @@ export function ToyEdit() {
         setToyToEdit(prevToy => ({ ...prevToy, [field]: value }))
     }
 
-    function onSaveToy(ev) {
+    async function onSaveToy() {
         // ev.preventDefault()
         if (!Array.isArray(toyToEdit.labels)) {
             let splitLabels = toyToEdit.labels.split(',')
             splitLabels = splitLabels.map(label => label.trim())
             toyToEdit.labels = splitLabels
         }
-        saveToy(toyToEdit)
-            .then(() => {
-                showSuccessMsg('Toy Saved!')
-                navigate('/toy')
-            })
-            .catch(err => {
-                console.log('Had issues in toy details', err)
-                showErrorMsg('Had issues in toy details')
-            })
+        try {
+            await saveToy(toyToEdit)
+            showSuccessMsg('Toy Saved!')
+            navigate('/toy')
+        } catch (err) {
+            console.log('Had issues in toy details', err)
+            showErrorMsg('Had issues in toy details')
+        }
     }
 
     return (

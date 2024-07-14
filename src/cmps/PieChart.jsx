@@ -33,7 +33,7 @@ export function PieChart() {
                 setLabels(stats.labels)
                 setValues(stats.values)
             })
-    }, [labels])
+    }, [])
     
     const pieData = {
         labels,

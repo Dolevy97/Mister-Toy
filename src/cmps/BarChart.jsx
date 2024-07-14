@@ -33,7 +33,7 @@ export function BarChart() {
                 setLabels(stats.labels)
                 setValues(stats.values)
             })
-    }, [labels])
+    }, [])
 
     const options = {
         responsive: true,
@@ -58,7 +58,6 @@ export function BarChart() {
             },
         ],
     }
-
 
     // if (!labels || !values) return <h3>Loading..</h3>
     return <Bar options={options} data={data} />;
