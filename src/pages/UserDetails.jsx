@@ -2,27 +2,31 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toyService } from "../services/toy.service";
+import { userService } from "../services/user.service";
 
 export function UserDetails() {
     const { userId } = useParams()
-    const user = useSelector(storeState => storeState.userModule.loggedInUser)
+    const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
+    const [user, setUser] = useState(null)
     const [reviews, setReviews] = useState(null)
     const navigate = useNavigate()
 
     useEffect(() => {
-        loadReviews()
+        loadReviewsAndUser()
     }, [])
 
-    async function loadReviews() {
+    async function loadReviewsAndUser() {
+        const user = await userService.getById(userId)
+        setUser(user)
         const reviews = await toyService.getReviews({ byUserId: user._id })
         setReviews(reviews)
     }
 
+    if (!user) return <h3>Loading..</h3>
     return (
         <section className="user-details">
-            <h2>Welcome to {userId === user._id ? 'your profile page' : `${user.fullname}'s profile page`}</h2>
+            {user && <h2>Welcome to {userId === loggedInUser._id ? 'your profile page' : `${user.fullname}'s profile page`}</h2>}
             <h3>Reviews</h3>
-
             {reviews && reviews.length ?
                 reviews.map(review =>
                     <article className="user-details-review-container" key={review._id} >

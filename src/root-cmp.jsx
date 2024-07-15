@@ -12,11 +12,12 @@ import { Dashboard } from './pages/Dashboard.jsx'
 import { About } from './pages/About.jsx'
 import { Login } from './pages/Login.jsx'
 import { UserDetails } from './pages/UserDetails.jsx'
+import { ReviewExplore } from './pages/ReviewExplore.jsx'
 
 import "../src/assets/style/main.scss"
 
-export function App() {
 
+export function App() {
   return (
     <Provider store={store}>
       <Router>
@@ -32,6 +33,7 @@ export function App() {
               <Route element={<Dashboard />} path="/dashboard" />
               <Route element={<About />} path="/about" />
               <Route element={<UserDetails />} path="/user/:userId" />
+              <Route element={<ReviewExplore />} path="/reviews" />
             </Routes>
           </main>
           <AppFooter />
