@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { toyService } from "../services/toy.service";
 import { Button } from "@mui/material";
+import { toyService } from "../services/toy.service";
 import { useSelector } from "react-redux";
+import { Messages } from "../cmps/Messages";
+import { Reviews } from "../cmps/Reviews";
 
 export function ToyDetails() {
     const { toyId } = useParams()
@@ -13,30 +15,11 @@ export function ToyDetails() {
     useEffect(() => {
         toyService.getById(toyId)
             .then(setToy)
-    }, [toy])
-
-    async function onAddMsg(ev) {
-        ev.preventDefault()
-        const msgTxt = ev.target.elements.msgtxt.value
-        try {
-            await toyService.addToyMsg(toyId, msgTxt)
-            ev.target.elements.msgtxt.value = ''
-        } catch (error) {
-            console.log(error)
-            throw error
-        }
-    }
-
-    async function onDeleteMsg(msgId) {
-        try {
-            await toyService.removeToyMsg(toyId, msgId)
-        } catch (error) {
-            console.log(error)
-            throw error
-        }
-    }
+    }, [])
 
     if (!toy) return <h2>Loading..</h2>
+
+    // console.log('test')
 
     return (
         <article className="toy-details-container">
@@ -48,25 +31,8 @@ export function ToyDetails() {
             <p>${toy.price}</p>
             <h3>{toy.inStock ? 'Currently in stock!' : 'Out of stock'}</h3>
             <Button size="large" variant="contained" className="btn btn-checkout">{toy.inStock ? 'Buy now!' : "Notify me when available"}</Button>
-
-            <section className="messages">
-                <h2>Toy Messages</h2>
-                {/* <hr /> */}
-
-                {!toy.msgs.length && 'No messages yet, be the first!'}
-                {user? <form onSubmit={() => onAddMsg(event)}>
-                    <textarea name="msgtxt" placeholder="Enter your message"></textarea>
-                    <button>Add</button>
-                </form> : <h3>Log in to add a message!</h3>}
-                {toy.msgs.map(msg =>
-                    <article className="toy-message" key={msg.id}>
-                        <h5>{msg.by.fullname}:</h5>
-                        <h4>{msg.txt}</h4>
-                        <hr />
-                        {user && user.isAdmin && <button onClick={() => onDeleteMsg(msg.id)} title="delete message" className="btn-delete">X</button>}
-                    </article>
-                )}
-            </section>
+            <Messages user={user} toy={toy} setToy={setToy} />
+            <Reviews user={user} toy={toy} />
         </article>
     )
 }

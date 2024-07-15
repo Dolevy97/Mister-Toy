@@ -26,7 +26,7 @@ export function GoogleMap() {
         <Button onClick={() => onChangeMapCoords({ lat: 29.550974, lng: 34.956912 })} variant="contained">Eilat</Button>
       </article>
 
-      <div style={{ height: '50vh', width: '100%' }}>
+      <div style={{ height: '50vh', width: '100%', overflow: 'hidden', borderRadius: '12px'}}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyC3JYJV46HLqEVYXfj9bo5_b4yO0UOD_WI" }}
           center={coords}

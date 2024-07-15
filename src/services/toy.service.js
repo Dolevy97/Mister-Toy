@@ -10,6 +10,9 @@ export const toyService = {
     save,
     addToyMsg,
     removeToyMsg,
+    getReviews,
+    addToyReview,
+
     getRandomToy,
     getEmptyToy,
     getDefaultFilter,
@@ -82,6 +85,27 @@ async function removeToyMsg(toyId, msgId) {
         return res
     } catch (error) {
         console.error('Error removing message:', error)
+        throw error
+    }
+}
+
+async function getReviews(filterBy = {}) {
+    try {
+        const res = await httpService.get(`review`, filterBy)
+        return res
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error
+    }
+}
+
+async function addToyReview(toyId, userId, txt) {
+    try {
+        const body = {toyId, userId, txt}
+        const res = await httpService.post(`review`, body)
+        return res
+    } catch (error) {
+        console.error('Error adding review:', error)
         throw error
     }
 }
