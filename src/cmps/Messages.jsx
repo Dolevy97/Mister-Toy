@@ -35,8 +35,6 @@ export function Messages({ toy, user, setToy }) {
         }
     }
 
-    console.log(toy)
-
     return (
         <section className="messages">
             <h2>Toy Messages</h2>

@@ -12,7 +12,7 @@ export const toyService = {
     removeToyMsg,
     getReviews,
     addToyReview,
-
+    removeToyReview,
     getRandomToy,
     getEmptyToy,
     getDefaultFilter,
@@ -101,11 +101,21 @@ async function getReviews(filterBy = {}) {
 
 async function addToyReview(toyId, userId, txt) {
     try {
-        const body = {toyId, userId, txt}
+        const body = { toyId, userId, txt }
         const res = await httpService.post(`review`, body)
         return res
     } catch (error) {
         console.error('Error adding review:', error)
+        throw error
+    }
+}
+
+async function removeToyReview(reviewId) {
+    try {
+        const res = await httpService.delete(`review/${reviewId}`)
+        return res
+    } catch (error) {
+        console.error('Error removing message:', error)
         throw error
     }
 }

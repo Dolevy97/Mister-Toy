@@ -52,6 +52,7 @@
 
     .messages {
         text-align: center;
+
         form {
             display: flex;
             gap: .2em;
@@ -70,6 +71,41 @@
 
     .toy-message {
         position: relative;
+
+        & * {
+            max-width: 50vw;
+            word-wrap: break-word;
+        }
+
+        .btn-delete {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+}
+
+.reviews-container {
+    text-align: center;
+
+    form {
+        display: flex;
+        gap: .2em;
+        margin-block: 1em;
+
+        textarea {
+            font-family: inherit;
+            min-width: 20vw;
+            max-width: 60vw;
+            min-height: 4vh;
+            max-height: 10vh;
+            margin: auto;
+        }
+    }
+
+    .toy-review {
+        position: relative;
+
         & * {
             max-width: 50vw;
             word-wrap: break-word;
