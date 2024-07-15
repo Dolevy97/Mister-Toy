@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { logout } from '../store/actions/user.actions'
 
 
 export function AppHeader() {
     const user = useSelector(storeState => storeState.userModule.loggedInUser)
+    const navigate = useNavigate()
 
     return (
         <header className="header-container">
@@ -24,7 +25,7 @@ export function AppHeader() {
             <section className="header-right">
                 {user ?
                     <>
-                        <h4>Hey {user.fullname}</h4>
+                        <h4 onClick={() => {navigate(`user/${user._id}`)}}>Hey {user.fullname}</h4>
                         <button onClick={() => logout()}>Logout</button>
                     </>
                     :

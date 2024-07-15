@@ -1,0 +1,31 @@
+.user-details {
+    margin-block: 2em;
+    text-align: center;
+
+    h2 {
+        font-weight: 500;
+        font-size: 2em;
+    }
+
+    h3 {
+        margin-block: 1em;
+        font-size: 1.6em;
+        text-decoration: underline;
+    }
+
+    h4 {
+        font-size: 1.3em;
+    }
+
+
+    .user-details-review-container {
+        span {
+            font-weight: 500;
+        }
+
+        hr {
+            margin-block: 2em;
+            opacity: 0.2;
+        }
+    }
+}
