@@ -16,7 +16,8 @@ export function userReducer(state = initialState, action = {}) {
     switch (action.type) {
 
         case SET_USER:
-            return { ...state, loggedinUser: action.user }
+            console.log(action.user)
+            return { ...state, loggedInUser: action.user }
         case SET_USERS:
             return { ...state, users: action.users }
         case SET_WATCHED_USER:

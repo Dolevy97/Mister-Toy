@@ -38,7 +38,7 @@ export function ChatRoom({ toy }) {
 
     function sendMsg(ev) {
         ev.preventDefault()
-        const from = loggedInUser?.fullname || 'Me'
+        const from = loggedInUser?.fullname
         const newMsg = { from, txt: msg.txt }
         socketService.emit(SOCKET_EMIT_SEND_MSG, newMsg)
         setMsg({ txt: '' })
@@ -56,15 +56,15 @@ export function ChatRoom({ toy }) {
             <h3>Chat about {toy.name}</h3>
             <section className="chat-container">
                 <ul>
-                    {msgs.map((msg, idx) => (<li key={idx}>{msg.from === loggedInUser.fullname? 'Me' : msg.from}: {msg.txt}</li>))}
+                    {msgs.map((msg, idx) => (<li key={idx}><b>{msg.from}:</b> {msg.txt}</li>))}
                 </ul>
             </section>
 
             <form onSubmit={sendMsg}>
-                <input
+                {loggedInUser ? <input
                     type="text" value={msg.txt} onChange={handleFormChange}
-                    name="txt" autoComplete="off" />
-                <button>Send</button>
+                    name="txt" autoComplete="off" /> : 'Log in to send a message!'}
+                {loggedInUser && <button>Send</button>}
             </form>
 
         </section>
