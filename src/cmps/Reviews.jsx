@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { toyService } from "../services/toy.service.js";
-import { reviewService } from "../services/review.service.js";
 import { addReview, loadReviews, removeReview } from "../store/actions/review.actions.js";
 import { useSelector } from "react-redux";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 
 
 export function Reviews({ user, toy }) {
@@ -10,7 +9,7 @@ export function Reviews({ user, toy }) {
     const reviews = useSelector(storeState => storeState.reviewModule.reviews)
 
     useEffect(() => {
-        loadReviews()
+        loadReviews({byToyId: toy._id})
     }, [])
 
 
@@ -20,26 +19,26 @@ export function Reviews({ user, toy }) {
         ev.target.elements.reviewtxt.value = ''
         try {
             await addReview({ txt: reviewTxt, toyId: toy._id })
+            showSuccessMsg('Review added successfully')
+
         } catch (error) {
             console.log('Error adding review:', error)
-            throw error
+            showErrorMsg('Error adding review')
         }
     }
 
     async function onDeleteReview(reviewId) {
         try {
             await removeReview(reviewId)
+            showSuccessMsg('Review removed successfully')
         } catch (error) {
-            console.log('Error removing review:', error)
-            throw error
+            showErrorMsg('Error removing review')
         }
     }
 
     return (
         <section className="reviews-container">
             <h1>Reviews</h1>
-            <button onClick={() => onAddReview()}>Test</button>
-
             {user ? <form onSubmit={() => onAddReview(event)}>
                 <textarea name="reviewtxt" placeholder="Enter your review" required></textarea>
                 <button>Add</button>

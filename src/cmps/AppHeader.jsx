@@ -21,9 +21,6 @@ export function AppHeader() {
         <header className="header-container">
             <section className="header-left">
                 <h1>Mister Toy</h1>
-
-
-
                 <nav className="app-nav">
                     <NavLink to="/" >Home</NavLink>
                     <NavLink to="/toy" >Toys</NavLink>

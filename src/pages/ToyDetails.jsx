@@ -5,6 +5,7 @@ import { toyService } from "../services/toy.service";
 import { useSelector } from "react-redux";
 import { Messages } from "../cmps/Messages";
 import { Reviews } from "../cmps/Reviews";
+import { ChatRoom } from "./ChatRoom";
 
 export function ToyDetails() {
     const { toyId } = useParams()
@@ -15,11 +16,12 @@ export function ToyDetails() {
     useEffect(() => {
         toyService.getById(toyId)
             .then(setToy)
+
+
     }, [])
 
     if (!toy) return <h2>Loading..</h2>
 
-    // console.log('test')
 
     return (
         <article className="toy-details-container">
@@ -33,6 +35,7 @@ export function ToyDetails() {
             <Button size="large" variant="contained" className="btn btn-checkout">{toy.inStock ? 'Buy now!' : "Notify me when available"}</Button>
             <Messages user={user} toy={toy} setToy={setToy} />
             <Reviews user={user} toy={toy} />
+            <ChatRoom toy={toy} />
         </article>
     )
 }

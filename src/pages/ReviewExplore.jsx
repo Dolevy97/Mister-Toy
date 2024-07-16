@@ -1,30 +1,46 @@
 import { useEffect, useState } from "react"
 import { toyService } from "../services/toy.service"
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { reviewService } from "../services/review.service"
 import { loadUsers } from "../store/actions/user.actions"
+
+import { socketService, SOCKET_EVENT_REVIEW_ADDED, SOCKET_EVENT_REVIEW_REMOVED } from '../services/socket.service'
+import { getActionAddReview, getActionRemoveReview, loadReviews, removeReview } from "../store/actions/review.actions"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
 export function ReviewExplore() {
     const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
     const users = useSelector(storeState => storeState.userModule.users)
+    const reviews = useSelector(storeState => storeState.reviewModule.reviews)
 
-    const [reviews, setReviews] = useState(null)
     const [filterBy, setFilterBy] = useState({ aboutToyId: '', byUserId: '' })
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
-        loadReviews()
+        loadReviews(filterBy)
     }, [filterBy])
 
     useEffect(() => {
         loadUsers()
-    }, [])
 
-    async function loadReviews() {
-        const reviews = await reviewService.query(filterBy)
-        setReviews(reviews)
-    }
+        socketService.on(SOCKET_EVENT_REVIEW_ADDED, review => {
+            console.log('GOT from socket', review)
+            dispatch(getActionAddReview(review))
+        })
+
+        socketService.on(SOCKET_EVENT_REVIEW_REMOVED, reviewId => {
+            console.log('GOT from socket', reviewId)
+            dispatch(getActionRemoveReview(reviewId))
+        })
+
+        return () => {
+            socketService.off(SOCKET_EVENT_REVIEW_ADDED)
+            socketService.off(SOCKET_EVENT_REVIEW_REMOVED)
+        }
+    }, [])
 
     function handleChange(ev) {
         const { name, value } = ev.target
@@ -33,13 +49,13 @@ export function ReviewExplore() {
 
     async function onDeleteReview(reviewId) {
         try {
-            await toyService.removeToyReview(reviewId)
-            loadReviews()
+            await removeReview(reviewId)
+            showSuccessMsg('Review removed')
         } catch (error) {
-            console.log('Error removing review:', error)
-            throw error
+            showErrorMsg('Cannot remove')
         }
     }
+
 
     return (
         <section className="review-explore">
@@ -51,8 +67,7 @@ export function ReviewExplore() {
                         <select
                             onChange={handleChange}
                             value={filterBy.byUserId}
-                            name='byUserId'
-                        >
+                            name='byUserId'>
                             <option value=''>Select User</option>
                             {users.map((user) => (
                                 <option key={user._id} value={user._id}>

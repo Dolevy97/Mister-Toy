@@ -49,6 +49,7 @@ export function ToyIndex() {
         ev.stopPropagation()
         try {
             await removeToy(toyId)
+            showSuccessMsg('Toy removed successfully')
         } catch (err) {
             showErrorMsg('Cannot remove toy')
             throw err

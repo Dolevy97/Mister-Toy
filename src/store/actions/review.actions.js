@@ -14,9 +14,9 @@ export function getActionSetWatchedUser(user) {
   return { type: SET_WATCHED_USER, user }
 }
 
-export async function loadReviews() {
+export async function loadReviews(filterBy) {
   try {
-    const reviews = await reviewService.query()
+    const reviews = await reviewService.query(filterBy)
     store.dispatch({ type: SET_REVIEWS, reviews })
 
   } catch (err) {

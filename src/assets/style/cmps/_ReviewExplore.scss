@@ -8,10 +8,11 @@
 
     .explore-reviews-container {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
         gap: 1em;
-
+        width: 80vw;
+        margin-block: 1em;
 
         .explore-review-container {
             display: flex;
@@ -48,8 +49,8 @@
 .filter-review-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
     margin: 2em auto;
 

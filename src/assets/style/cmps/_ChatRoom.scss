@@ -1,0 +1,41 @@
+.chat-room-container {
+
+    position: fixed;
+    right: 1em;
+    bottom: 0;
+
+    padding: 0 .5em;
+    
+    min-width: 245px;
+    width: 30vw;
+    height: 30vh;
+
+    border-radius: 8px 8px 0 0;
+
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 0.1);
+    
+
+    h3 {
+        text-align: center;
+        font-weight: 600;
+        font-size: 1em;
+    }
+
+    input {
+        margin: auto;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-inline-start: 0;
+    }
+
+    .chat-container {
+        overflow: auto;
+        height: 25vh;
+        display: flex;
+        flex-direction: column-reverse;
+        overflow-anchor: auto !important; /*  See https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-anchor */
+    }
+}

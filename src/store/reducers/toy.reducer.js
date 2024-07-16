@@ -12,7 +12,7 @@ export const SET_SORT_BY = 'SET_SORT_BY'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 const initialState = {
-    toys: null,
+    toys: [],
     isLoading: false,
     filterBy: toyService.getDefaultFilter(),
     sortBy: { field: 'name', dir: 1 }

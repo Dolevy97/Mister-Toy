@@ -54,7 +54,7 @@ async function remove(toyId) {
 async function save(toy) {
     try {
         if (toy._id) {
-            await httpService.put(BASE_URL, toy)
+            await httpService.put(`${BASE_URL}${toy._id}`, toy)
             return toy
         } else {
             await httpService.post(BASE_URL, toy)
