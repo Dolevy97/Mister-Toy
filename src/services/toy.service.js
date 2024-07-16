@@ -10,9 +10,6 @@ export const toyService = {
     save,
     addToyMsg,
     removeToyMsg,
-    getReviews,
-    addToyReview,
-    removeToyReview,
     getRandomToy,
     getEmptyToy,
     getDefaultFilter,
@@ -82,37 +79,6 @@ async function addToyMsg(toyId, txt) {
 async function removeToyMsg(toyId, msgId) {
     try {
         const res = await httpService.delete(`${BASE_URL}${toyId}/msg/${msgId}`)
-        return res
-    } catch (error) {
-        console.error('Error removing message:', error)
-        throw error
-    }
-}
-
-async function getReviews(filterBy = {}) {
-    try {
-        const res = await httpService.get(`review`, filterBy)
-        return res
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error
-    }
-}
-
-async function addToyReview(toyId, userId, txt) {
-    try {
-        const body = { toyId, userId, txt }
-        const res = await httpService.post(`review`, body)
-        return res
-    } catch (error) {
-        console.error('Error adding review:', error)
-        throw error
-    }
-}
-
-async function removeToyReview(reviewId) {
-    try {
-        const res = await httpService.delete(`review/${reviewId}`)
         return res
     } catch (error) {
         console.error('Error removing message:', error)

@@ -1,20 +1,28 @@
 import { userService } from "../../services/user.service.js"
 
-//* User
+
 export const SET_USER = 'SET_USER'
+export const SET_USERS = 'SET_USERS'
+export const SET_WATCHED_USER = 'SET_WATCHED_USER'
+
 
 const initialState = {
     loggedInUser: userService.getLoggedinUser(),
+    users: [],
+    watchedUser: null
 }
 
-export function userReducer(state = initialState, cmd = {}) {
-    switch (cmd.type) {
+export function userReducer(state = initialState, action = {}) {
+    switch (action.type) {
+
         case SET_USER:
-            return {
-                ...state,
-                loggedInUser: cmd.user
-            }
+            return { ...state, loggedinUser: action.user }
+        case SET_USERS:
+            return { ...state, users: action.users }
+        case SET_WATCHED_USER:
+            return { ...state, watchedUser: action.user }
+
         default:
-            return state
+            return state;
     }
 }

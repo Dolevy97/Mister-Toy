@@ -29,6 +29,7 @@ export function Login() {
                 user = await signup(newUser)
             } else {
                 user = await login(newUser)
+                console.log(user)
             }
 
             if (user) {

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toyService } from "../services/toy.service";
 import { userService } from "../services/user.service";
+import { reviewService } from "../services/review.service";
 
 export function UserDetails() {
     const { userId } = useParams()
@@ -18,7 +19,7 @@ export function UserDetails() {
     async function loadReviewsAndUser() {
         const user = await userService.getById(userId)
         setUser(user)
-        const reviews = await toyService.getReviews({ byUserId: user._id })
+        const reviews = await reviewService.query({ byUserId: user._id })
         setReviews(reviews)
     }
 

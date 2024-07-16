@@ -16,7 +16,7 @@ export function AppHeader() {
             throw error
         }
     }
-
+    
     return (
         <header className="header-container">
             <section className="header-left">

@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
 import { toyService } from "../services/toy.service.js";
+import { reviewService } from "../services/review.service.js";
+import { addReview, loadReviews, removeReview } from "../store/actions/review.actions.js";
+import { useSelector } from "react-redux";
 
 
 export function Reviews({ user, toy }) {
-    const [reviews, setReviews] = useState(null)
+
+    const reviews = useSelector(storeState => storeState.reviewModule.reviews)
 
     useEffect(() => {
         loadReviews()
     }, [])
 
-    async function loadReviews() {
-        const reviews = await toyService.getReviews({ byToyId: toy._id })
-        setReviews(reviews)
-    }
 
     async function onAddReview(ev) {
         ev.preventDefault()
         const reviewTxt = ev.target.elements.reviewtxt.value
         ev.target.elements.reviewtxt.value = ''
         try {
-            await toyService.addToyReview(toy._id, user._id, reviewTxt)
-            loadReviews()
+            await addReview({ txt: reviewTxt, toyId: toy._id })
         } catch (error) {
             console.log('Error adding review:', error)
             throw error
@@ -29,8 +28,7 @@ export function Reviews({ user, toy }) {
 
     async function onDeleteReview(reviewId) {
         try {
-            await toyService.removeToyReview(reviewId)
-            loadReviews()
+            await removeReview(reviewId)
         } catch (error) {
             console.log('Error removing review:', error)
             throw error
