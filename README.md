@@ -15,7 +15,6 @@ MisterToy is a basic CRUD (Create, Read, Update, Delete) project designed as an 
 - **ReactJS**: For building the user interface.
 - **HTML5**: For structuring the content.
 - **SASS**: For styling and responsive design.
-- **Socket.io**: For real-time chat functionality.
 - **Express**: Backend server framework.
 - **MongoDB**: For database management.
 
