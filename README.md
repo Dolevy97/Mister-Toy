@@ -25,6 +25,3 @@ Join chat rooms to interact with other users in real-time.
 
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or features you'd like to see.
-
-## License
-This project is licensed under the MIT License.
